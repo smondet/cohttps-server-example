@@ -1,5 +1,5 @@
-Quick Eample Code
-=================
+Quick Example Code
+==================
 
 This is a *minimalistic* piece of code showing the creation of an HTTPS server
 using `cohttp.lwt` and `lwt.ssl`.
@@ -26,7 +26,7 @@ Test:
 
      ./dummyserver
 
-Both HTTP and HTTPS servers are created; got to <https://localhost:8081> or
+Both HTTP and HTTPS servers are created; go to <https://localhost:8081> or
 <http://localhost:8082>, it should display some HTML.
 
 
@@ -43,7 +43,7 @@ with Wget 1.14, I don't:
 
     wget --no-check-certificate https://<host>:8081
 
-Firfox works without problem.
+Firefox works without problem.
 
 Ocsigenserver uses `SSLv23` (c.f.
 [`ocsigen_http_client.ml:88`](https://github.com/ocsigen/ocsigenserver/blob/master/src/server/ocsigen_http_client.ml#L88)).
