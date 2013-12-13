@@ -65,8 +65,7 @@ module Server = struct
       accept_loop () |> Lwt.ignore_result;
       Lwt_list.map_p handle_one accepted_list
     in
-    accept_loop ()
-    >>= fun (_ : unit list) ->
+    accept_loop () |> Lwt.ignore_result;
     return ()
 
 
@@ -79,7 +78,9 @@ let make_server () =
     dbg "Path: %s, uri: %s" (Uri.path (Request.uri req))
       (Request.uri req |> Uri.to_string |> Uri.pct_decode);
     match Uri.path (Request.uri req) with
-    | path -> fail Not_found
+    | path ->
+      let body = "<html><h1>Hello World!</h1></html>" in
+      Server.respond_string ~status:`OK ~body ()
   in
   let conn_closed conn_id () =
     dbg "conn %S closed" (Cohttp.Connection.to_string conn_id)
@@ -90,7 +91,6 @@ let make_server () =
   Server.create ~address:"0.0.0.0" ~port:8082 config
   >>= fun _ ->
   return ()
-  (* Lwt_io.(read_char stdin) >>= fun _ -> return () *)
 
 
 let () = Lwt_main.run (make_server ())
